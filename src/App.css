@@ -1,0 +1,9 @@
+.abusha-app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: clip;
+  background-color: var(--color-bg-primary);
+}

@@ -1,0 +1,115 @@
+.why-choose-section {
+  padding-block: 48px;
+  background-color: #fff4f7;
+  border-block-start: 1px solid var(--color-border-subtle);
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.reason-card {
+  background-color: #ffffff;
+  border: 1px solid #f3d4dc;
+  border-radius: 4px;
+  padding-block: 22px;
+  padding-inline: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(220, 160, 180, 0.1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(220, 160, 180, 0.22);
+}
+
+.reason-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fedee6 0%, #fcd4e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b1d22;
+  margin-bottom: 12px;
+}
+
+.reason-title {
+  font-family: var(--font-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #1a1215;
+  margin-bottom: 8px;
+}
+
+.reason-desc {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  color: #6d5b63;
+  line-height: 1.45;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .why-choose-section {
+    padding-block: 36px;
+  }
+  .reasons-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .why-choose-section {
+    padding-block: 32px;
+  }
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 10px;
+  }
+  .reason-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 320px;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .reason-card {
+    padding-block: 18px;
+    padding-inline: 12px;
+  }
+  .reason-icon-wrap {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 10px;
+  }
+  .reason-title {
+    font-size: 12px;
+  }
+  .reason-desc {
+    font-size: 9.5px;
+  }
+}
+
+@media (max-width: 440px) {
+  .why-choose-section {
+    padding-block: 28px;
+  }
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+  .reason-card:last-child {
+    grid-column: auto;
+  }
+}

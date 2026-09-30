@@ -1,0 +1,432 @@
+/* ==================================================
+   HERO SECTION: Single Full-Width Slide with Left Overlay
+   ================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-color: #fedee6;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(220, 185, 195, 0.45);
+  margin: 0;
+  padding: 0;
+}
+
+/* 1. Full-Width Background Slider */
+.hero-bg-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.hero-bg-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
+/* 2. Subtle Soft Gradient Overlay for Readability */
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(254, 222, 230, 0.75) 0%,
+    rgba(254, 222, 230, 0.45) 42%,
+    transparent 75%
+  );
+}
+
+/* 3. Foreground Overlay Content Layer */
+.hero-overlay-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1560px;
+  height: 100%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-inline: 40px;
+  box-sizing: border-box;
+}
+
+/* Left Content Block: Sits directly over the hero image (NO separate card) */
+.hero-text-overlay {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+/* ==================================================
+   FIXED SLOTS: Prevents ANY Layout Shift During Auto-Slide
+   ================================================== */
+.hero-slot {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* 1. Logo Slot: Positioned ABOVE the text */
+.hero-logo-slot {
+  height: 116px;
+  margin-bottom: 10px;
+}
+
+.hero-logo-img {
+  height: 135px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+}
+
+/* 2. Heading Slot: Fixed 68px Reserved Height */
+.hero-heading-slot {
+  height: 68px;
+  margin-bottom: 2px;
+}
+
+.hero-heading-text {
+  font-family: var(--font-serif);
+  font-size: 31px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #171013;
+  line-height: 1.16;
+  text-align: center;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* 3. Subtitle Slot: Fixed 20px Height */
+.hero-subtitle-slot {
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.hero-subtitle-text {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: #2b1f23;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* 4. Script Tagline Slot: Fixed 84px Height */
+.hero-script-slot {
+  height: 84px;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.hero-script-line {
+  font-family: var(--font-script);
+  font-size: 40px;
+  color: #1b1215;
+  line-height: 1.08;
+  display: block;
+  text-align: center;
+}
+
+/* 5. Decorative Divider Slot: Fixed 22px Height */
+.hero-divider-slot {
+  height: 22px;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hero-divider-line {
+  width: 80px;
+  height: 1px;
+  background-color: #554248;
+  opacity: 0.45;
+}
+
+.hero-divider-heart {
+  font-size: 15px;
+  color: #554248;
+  line-height: 1;
+}
+
+/* 6. CTA Button Slot: Fixed 48px Height, Uniform 210px Button Width */
+.hero-btn-slot {
+  height: 48px;
+}
+
+.hero-fixed-btn {
+  width: 210px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0c0b0d;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.hero-fixed-btn:hover {
+  background-color: #261e21;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+}
+
+.hero-fixed-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ==================================================
+   CONTROLS: Arrows & Indicator Dots
+   ================================================== */
+.hero-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  color: #1e1417;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-arrow-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.arrow-prev {
+  inset-inline-start: 20px;
+}
+
+.arrow-next {
+  inset-inline-end: 20px;
+}
+
+.hero-dots {
+  position: absolute;
+  inset-block-end: 18px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(43, 30, 34, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.hero-dot.active {
+  background-color: #161012;
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* ==================================================
+   TABLET BREAKPOINT: 768px - 1023px
+   ================================================== */
+@media (max-width: 1023px) {
+  .hero-section {
+    height: 540px;
+  }
+
+  .hero-overlay-content {
+    padding-inline: 24px;
+  }
+
+  .hero-text-overlay {
+    max-width: 460px;
+  }
+
+  .hero-logo-slot {
+    height: 96px;
+    margin-bottom: 8px;
+  }
+
+  .hero-logo-img {
+    height: 86px;
+  }
+
+  .hero-heading-slot {
+    height: 64px;
+  }
+
+  .hero-heading-text {
+    font-size: 26px;
+  }
+
+  .hero-script-slot {
+    height: 74px;
+  }
+
+  .hero-script-line {
+    font-size: 34px;
+  }
+
+  .hero-fixed-btn {
+    width: 190px;
+    height: 40px;
+    font-size: 10.5px;
+  }
+
+  .arrow-prev {
+    inset-inline-start: 10px;
+  }
+
+  .arrow-next {
+    inset-inline-end: 10px;
+  }
+}
+
+/* ==================================================
+   MOBILE BREAKPOINT: < 768px
+   ================================================== */
+@media (max-width: 767px) {
+  .hero-section {
+    height: 560px;
+  }
+
+  .hero-overlay-content {
+    justify-content: center;
+    padding-inline: 16px;
+  }
+
+  .hero-bg-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(254, 222, 230, 0.92) 0%,
+      rgba(254, 222, 230, 0.8) 60%,
+      rgba(254, 222, 230, 0.4) 100%
+    );
+  }
+
+  .hero-text-overlay {
+    max-width: 100%;
+  }
+
+  .hero-logo-slot {
+    height: 82px;
+    margin-bottom: 10px;
+  }
+
+  .hero-logo-img {
+    height: 105px;
+  }
+
+  .hero-heading-slot {
+    height: 56px;
+    margin-bottom: 2px;
+  }
+
+  .hero-heading-text {
+    font-size: 22px;
+    letter-spacing: 0.18em;
+  }
+
+  .hero-subtitle-slot {
+    height: 18px;
+    margin-bottom: 4px;
+  }
+
+  .hero-subtitle-text {
+    font-size: 9px;
+  }
+
+  .hero-script-slot {
+    height: 64px;
+    margin-bottom: 8px;
+  }
+
+  .hero-script-line {
+    font-size: 28px;
+  }
+
+  .hero-divider-slot {
+    height: 18px;
+    margin-bottom: 12px;
+  }
+
+  .hero-btn-slot {
+    height: 42px;
+  }
+
+  .hero-fixed-btn {
+    width: 180px;
+    height: 38px;
+    font-size: 10px;
+  }
+
+  .hero-arrow-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow-prev {
+    inset-inline-start: 8px;
+  }
+
+  .arrow-next {
+    inset-inline-end: 8px;
+  }
+}
+

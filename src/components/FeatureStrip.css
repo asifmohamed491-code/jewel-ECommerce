@@ -1,0 +1,119 @@
+.feature-strip-wrap {
+  background-color: #fff9fb;
+  border-block-start: 1px solid var(--color-border-subtle);
+  border-block-end: 1px solid var(--color-border-subtle);
+  padding-block: 22px;
+  width: 100%;
+}
+
+.feature-strip-container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  padding-inline: 10px;
+}
+
+.feature-icon-box {
+  color: #24181c;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.feature-item:hover .feature-icon-box {
+  transform: translateY(-2px);
+  color: #0c0b0c;
+}
+
+.feature-icon {
+  font-size: 24px;
+  stroke-width: 1.6;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #1a1215;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  line-height: 1.25;
+}
+
+.feature-subtitle {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  color: #69575e;
+  line-height: 1.25;
+}
+
+.feature-divider {
+  width: 1px;
+  height: 44px;
+  background-color: var(--color-border-subtle);
+}
+
+/* Tablet & Mobile responsive */
+@media (max-width: 860px) {
+  .feature-strip-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 14px;
+    justify-items: center;
+  }
+  .feature-divider {
+    display: none;
+  }
+  .feature-item {
+    padding: 6px 4px;
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 520px) {
+  .feature-strip-wrap {
+    padding-block: 16px;
+  }
+  .feature-strip-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 10px;
+  }
+  .feature-item:last-child {
+    grid-column: 1 / -1;
+    max-width: 240px;
+    margin-inline: auto;
+  }
+  .feature-icon {
+    font-size: 20px;
+  }
+  .feature-title {
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+  }
+  .feature-subtitle {
+    font-size: 9px;
+  }
+}
+

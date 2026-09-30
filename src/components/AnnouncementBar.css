@@ -1,0 +1,52 @@
+.announcement-bar {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-align: center;
+  position: relative;
+  z-index: 90;
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.announcement-bar .heart-icon {
+  color: #f78da7;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.announcement-text {
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.announcement-text .separator {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 9.5px;
+    padding: 6px 10px;
+    letter-spacing: 0.08em;
+  }
+  .announcement-content {
+    gap: 6px;
+  }
+  .announcement-text {
+    gap: 6px;
+  }
+}

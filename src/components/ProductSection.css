@@ -1,0 +1,212 @@
+.product-section {
+  padding-block: 48px;
+  background-color: #fff9fb;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform var(--transition-fast);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-image-box {
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  background-color: #fedee6;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(242, 203, 214, 0.6);
+  box-shadow: 0 4px 14px rgba(220, 160, 180, 0.15);
+  margin-bottom: 12px;
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.product-card:hover .product-image-box {
+  border-color: rgba(226, 157, 177, 0.85);
+  box-shadow: 0 8px 24px rgba(210, 140, 165, 0.28);
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.04);
+}
+
+/* Wishlist Heart Icon on Top-Right */
+.wishlist-heart-btn {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-end: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38292e;
+  backdrop-filter: blur(2px);
+  transition: all var(--transition-fast);
+  z-index: 2;
+}
+
+.wishlist-heart-btn:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+}
+
+.wishlist-heart-btn .heart-outline {
+  font-size: 15px;
+}
+
+.wishlist-heart-btn .heart-filled {
+  font-size: 15px;
+  color: #e44d6a;
+}
+
+.wishlist-heart-btn.active {
+  background: #ffffff;
+}
+
+/* Product Info */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.product-title {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e1317;
+  margin-bottom: 5px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.product-pricing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.current-price {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: #161012;
+}
+
+.old-price {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #8c7880;
+  text-decoration: line-through;
+}
+
+/* Add to Cart button */
+.add-to-cart-btn {
+  background-color: #0c0b0c;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  padding: 8px 18px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+  width: auto;
+  min-width: 110px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #2b1f24;
+  transform: translateY(-1px);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.add-to-cart-btn.added {
+  background-color: #27885b;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .product-section {
+    padding-block: 36px;
+  }
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 18px;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .product-section {
+    padding-block: 32px;
+  }
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+    max-width: 100%;
+  }
+  .product-title {
+    font-size: 12px;
+  }
+  .current-price {
+    font-size: 11.5px;
+  }
+  .add-to-cart-btn {
+    font-size: 9px;
+    padding: 7px 14px;
+    min-width: 95px;
+  }
+}
+
+@media (max-width: 360px) {
+  .products-grid {
+    gap: 12px 8px;
+  }
+  .product-title {
+    font-size: 11px;
+  }
+  .add-to-cart-btn {
+    font-size: 8.5px;
+    padding: 6px 10px;
+    min-width: 85px;
+  }
+}
+
