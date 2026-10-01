@@ -97,7 +97,6 @@ export default function NecklacesPage({
             <FiArrowLeft size={14} />
             <span>Back to All Collections</span>
           </button>
-          <span className="breadcrumb-badge">10 Handcrafted Pieces</span>
         </div>
 
         {/* Section Heading with flanking decorative lines */}

@@ -19,7 +19,7 @@
 .category-breadcrumb-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 24px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(226, 179, 195, 0.45);
@@ -40,6 +40,8 @@
   padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
+  white-space: nowrap;
+  width: fit-content;
   transition: all var(--transition-fast);
 }
 
@@ -48,18 +50,6 @@
   background-color: #fedee6;
   border-color: #d8899f;
   transform: translateX(-2px);
-}
-
-.breadcrumb-badge {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-  color: #7d656d;
-  background: #faeaf0;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(226, 179, 195, 0.5);
 }
 
 .category-subtitle {
