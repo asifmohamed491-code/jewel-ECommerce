@@ -6,6 +6,8 @@ import kadaImg from '../assets/categories/kada.png';
 import ringsImg from '../assets/categories/rings.png';
 import ankletsImg from '../assets/categories/anklets.png';
 import watchesImg from '../assets/categories/watches.png';
+import sareePinsImg from '../assets/categories/saree-pins.png';
+import hairAccessoriesImg from '../assets/categories/hair-accessories.png';
 
 export const categoriesData = [
   {
@@ -40,7 +42,7 @@ export const categoriesData = [
   },
   {
     id: 'rings',
-    name: 'RINGS',
+    name: 'FINGER RINGS',
     image: ringsImg,
     itemCount: 45,
   },
@@ -56,4 +58,17 @@ export const categoriesData = [
     image: watchesImg,
     itemCount: 19,
   },
+  {
+    id: 'saree-pins',
+    name: 'SAREE PINS',
+    image: sareePinsImg,
+    itemCount: 22,
+  },
+  {
+    id: 'hair-accessories',
+    name: 'HAIR ACCESSORIES',
+    image: hairAccessoriesImg,
+    itemCount: 31,
+  },
 ];
+
