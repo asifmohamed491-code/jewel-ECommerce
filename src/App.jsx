@@ -146,44 +146,46 @@ export default function App() {
         );
       }
 
-      // 3. Featured Products: Header reveal + product cards stagger
-      const productHeading = document.querySelector('.product-section .section-title-wrap');
-      if (productHeading) {
-        gsap.fromTo(
-          productHeading,
-          { opacity: 0, y: yOffset },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.55,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: '.product-section',
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      }
+      // 3. Featured Products: Header reveal + product cards stagger (when not in specific category view)
+      if (!selectedCategory) {
+        const productHeading = document.querySelector('.product-section .section-title-wrap');
+        if (productHeading) {
+          gsap.fromTo(
+            productHeading,
+            { opacity: 0, y: yOffset },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.55,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: '.product-section',
+                start: 'top 85%',
+                once: true,
+              },
+            }
+          );
+        }
 
-      const productCards = gsap.utils.toArray('.product-card');
-      if (productCards.length > 0) {
-        gsap.fromTo(
-          productCards,
-          { opacity: 0, y: yOffset },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: isMobile ? 0.06 : 0.09,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: '.products-grid',
-              start: 'top 86%',
-              once: true,
-            },
-          }
-        );
+        const productCards = gsap.utils.toArray('.product-card');
+        if (productCards.length > 0) {
+          gsap.fromTo(
+            productCards,
+            { opacity: 0, y: yOffset },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: isMobile ? 0.06 : 0.09,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: '.products-grid',
+                start: 'top 86%',
+                once: true,
+              },
+            }
+          );
+        }
       }
 
       // 4. Promo Banner: Card entrance + progressive reveal

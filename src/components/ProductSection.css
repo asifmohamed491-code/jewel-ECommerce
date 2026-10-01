@@ -1,6 +1,7 @@
 .product-section {
   padding-block: 48px;
   background-color: #fff9fb;
+  overflow-x: clip;
 }
 
 .products-grid {
