@@ -4,9 +4,22 @@ import { FaWhatsapp } from 'react-icons/fa';
 import logoImg from '../assets/logo/logo-abusha.png';
 import './Footer.css';
 
-export default function Footer() {
+export default function Footer({ onNavigate }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+
+  const handleLinkClick = (href) => (e) => {
+    if (onNavigate && window.location.pathname !== '/') {
+      e.preventDefault();
+      onNavigate('/');
+      setTimeout(() => {
+        if (href && href.startsWith('#')) {
+          const target = document.getElementById(href.substring(1));
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -43,10 +56,10 @@ export default function Footer() {
             <div className="footer-col">
               <h4 className="footer-heading">QUICK LINKS</h4>
               <ul className="footer-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#shop">Shop</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" onClick={handleLinkClick('#home')}>Home</a></li>
+                <li><a href="#shop" onClick={handleLinkClick('#shop')}>Shop</a></li>
+                <li><a href="#about" onClick={handleLinkClick('#about')}>About Us</a></li>
+                <li><a href="#contact" onClick={handleLinkClick('#contact')}>Contact</a></li>
               </ul>
             </div>
 

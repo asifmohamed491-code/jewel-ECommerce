@@ -4,15 +4,17 @@ import './CategorySection.css';
 
 export default function CategoryCard({ category, onSelectCategory }) {
   const handleClick = (e) => {
-    if (category.id === 'necklaces' && onSelectCategory) {
+    if (category.id === 'necklaces') {
       e.preventDefault();
-      onSelectCategory('necklaces');
+      if (onSelectCategory) {
+        onSelectCategory('/shop/necklaces');
+      }
     }
   };
 
   return (
     <a 
-      href={`#category-${category.id}`} 
+      href={category.id === 'necklaces' ? '/shop/necklaces' : `#category-${category.id}`} 
       className="category-card"
       onClick={handleClick}
     >

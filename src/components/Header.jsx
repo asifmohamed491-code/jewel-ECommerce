@@ -11,6 +11,7 @@ export default function Header({
   onOpenSearch, 
   onOpenCart,
   onOpenWishlist,
+  onNavigate,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('HOME');
@@ -48,6 +49,20 @@ export default function Header({
     if (tabName) setActiveTab(tabName);
     setMobileMenuOpen(false);
 
+    if (onNavigate && window.location.pathname !== '/') {
+      onNavigate('/');
+      setTimeout(() => {
+        if (href && href.startsWith('#')) {
+          const targetId = href.substring(1);
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
+      return;
+    }
+
     if (href && href.startsWith('#')) {
       const targetId = href.substring(1);
       const element = document.getElementById(targetId);
@@ -56,6 +71,13 @@ export default function Header({
           element.scrollIntoView({ behavior: 'smooth' });
         }, 50);
       }
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    if (onNavigate && window.location.pathname !== '/') {
+      e.preventDefault();
+      onNavigate('/');
     }
   };
 
@@ -84,7 +106,10 @@ export default function Header({
                 key={link.name}
                 href={link.href}
                 className={`nav-link ${activeTab === link.name ? 'active' : ''}`}
-                onClick={() => setActiveTab(link.name)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href, link.name);
+                }}
               >
                 {link.name}
               </a>
@@ -94,7 +119,7 @@ export default function Header({
 
         {/* Center: Brand Logo & Typography */}
         <div className="header-center">
-          <a href="#home" className="brand-logo-link">
+          <a href="/" className="brand-logo-link" onClick={handleLogoClick}>
             <div className="brand-emblem-wrap">
               <img src={logoImg} alt="Abusha Creation" className="brand-emblem-img" />
             </div>
@@ -147,7 +172,16 @@ export default function Header({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mobile-menu-header">
-              <div className="mobile-drawer-brand">
+              <div 
+                className="mobile-drawer-brand"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigate && window.location.pathname !== '/') {
+                    onNavigate('/');
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
                 <img src={logoImg} alt="Abusha" className="mobile-drawer-logo" />
                 <span>ABUSHA CREATION</span>
               </div>

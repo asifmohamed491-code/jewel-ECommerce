@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
 import SearchModal from './components/SearchModal';
+import NecklacesPage from './components/NecklacesPage';
 import { featuredProducts, allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
@@ -45,26 +46,41 @@ export default function App() {
     }
     return [1];
   });
-  const [selectedCategory, setSelectedCategory] = useState(() => {
-    if (typeof window !== 'undefined' && window.location.hash === '#category-necklaces') {
-      return 'necklaces';
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      if (path === '/shop/necklaces' || path === '/shop/necklaces/' || window.location.hash === '#category-necklaces') {
+        return '/shop/necklaces';
+      }
     }
-    return null;
+    return '/';
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Sync hash changes for category navigation
-  useEffect(() => {
-    const handleHashChange = () => {
-      if (window.location.hash === '#category-necklaces') {
-        setSelectedCategory('necklaces');
+  // Client-side navigate handler without full page reload
+  const navigate = (path) => {
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname !== path) {
+        window.history.pushState({}, '', path);
       }
+      setCurrentRoute(path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Browser back/forward navigation support
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      setCurrentRoute(path === '/shop/necklaces' || path === '/shop/necklaces/' ? '/shop/necklaces' : '/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
 
   // Sync favorites with localStorage
   useEffect(() => {
@@ -351,38 +367,7 @@ export default function App() {
     );
   };
 
-  // Select category handler
-  const handleSelectCategory = (categoryId) => {
-    if (categoryId === 'necklaces') {
-      setSelectedCategory('necklaces');
-      window.location.hash = '#category-necklaces';
-      setTimeout(() => {
-        const shopElement = document.getElementById('shop');
-        if (shopElement) {
-          shopElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 50);
-    }
-  };
-
-  // Reset to All / Featured collections
-  const handleResetCategory = () => {
-    setSelectedCategory(null);
-    if (window.location.hash === '#category-necklaces') {
-      try {
-        window.history.pushState(null, '', window.location.pathname + '#shop');
-      } catch (e) {
-        window.location.hash = '#shop';
-      }
-    }
-    setTimeout(() => {
-      const shopElement = document.getElementById('shop');
-      if (shopElement) {
-        shopElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 50);
-  };
-
+  const isNecklacesPage = currentRoute === '/shop/necklaces';
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
@@ -398,41 +383,52 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
+        onNavigate={navigate}
       />
 
-      {/* 3. Hero Carousel Section */}
-      <Hero />
+      {isNecklacesPage ? (
+        /* Dedicated Necklaces Page */
+        <NecklacesPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : (
+        /* Home Page Sections */
+        <>
+          {/* 3. Hero Carousel Section */}
+          <Hero />
 
-      {/* 4. 5-Item Feature Strip */}
-      <FeatureStrip />
+          {/* 4. 5-Item Feature Strip */}
+          <FeatureStrip />
 
-      {/* 5. Shop By Category */}
-      <CategorySection onSelectCategory={handleSelectCategory} />
+          {/* 5. Shop By Category */}
+          <CategorySection onSelectCategory={(route) => navigate(route || '/shop/necklaces')} />
 
-      {/* 6. Featured Products / Dedicated Necklaces Category */}
-      <ProductSection
-        onAddToCart={handleAddToCart}
-        onToggleWishlist={handleToggleWishlist}
-        wishlistedIds={wishlistIds}
-        selectedCategory={selectedCategory}
-        onResetCategory={handleResetCategory}
-      />
+          {/* 6. Featured Products (Home Page only) */}
+          <ProductSection
+            onAddToCart={handleAddToCart}
+            onToggleWishlist={handleToggleWishlist}
+            wishlistedIds={wishlistIds}
+          />
 
+          {/* 7. Promotional Banner */}
+          <PromoBanner />
 
-      {/* 7. Promotional Banner */}
-      <PromoBanner />
+          {/* 8. Why Choose Us */}
+          <WhyChooseUs />
 
-      {/* 8. Why Choose Us */}
-      <WhyChooseUs />
+          {/* 9. Testimonials */}
+          <Testimonials />
 
-      {/* 9. Testimonials */}
-      <Testimonials />
-
-      {/* 10. Social / Instagram Section */}
-      <SocialGallery />
+          {/* 10. Social / Instagram Section */}
+          <SocialGallery />
+        </>
+      )}
 
       {/* 11. Footer */}
-      <Footer />
+      <Footer onNavigate={navigate} />
 
       {/* Slide-out Cart Drawer */}
       <CartDrawer

@@ -4,6 +4,11 @@
   overflow-x: clip;
 }
 
+.necklaces-page-section {
+  padding-block: 40px 64px;
+  min-height: calc(100vh - 220px);
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
