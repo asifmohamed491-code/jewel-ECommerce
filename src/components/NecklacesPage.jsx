@@ -78,7 +78,7 @@ export default function NecklacesPage({
       }
 
       ScrollTrigger.refresh();
-    }, sectionRef);
+    }, sectionRef.current);
 
     return () => ctx.revert();
   }, []);
@@ -128,3 +128,4 @@ export default function NecklacesPage({
     </main>
   );
 }
+
