@@ -14,7 +14,7 @@ export default function CategorySection() {
           <span className="title-line"></span>
         </div>
 
-        {/* 5 Categories Grid */}
+        {/* 8 Categories Grid */}
         <div className="categories-grid">
           {categoriesData.map((category) => (
             <CategoryCard key={category.id} category={category} />

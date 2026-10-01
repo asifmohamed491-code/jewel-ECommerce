@@ -59,8 +59,8 @@
 }
 
 .category-circle {
-  width: 138px;
-  height: 138px;
+  width: 146px;
+  height: 146px;
   border-radius: 50%;
   overflow: hidden;
   background: radial-gradient(circle, #fde4ec 0%, #fbd5df 100%);
@@ -119,8 +119,8 @@
     gap: 12px;
   }
   .category-circle {
-    width: 114px;
-    height: 114px;
+    width: 122px;
+    height: 122px;
   }
   .category-name {
     font-size: 10px;
@@ -137,8 +137,8 @@
     gap: 24px 16px;
   }
   .category-circle {
-    width: 126px;
-    height: 126px;
+    width: 136px;
+    height: 136px;
   }
   .section-title {
     font-size: 17px;
@@ -161,8 +161,8 @@
     gap: 20px 10px;
   }
   .category-circle {
-    width: 98px;
-    height: 98px;
+    width: 106px;
+    height: 106px;
   }
   .category-name {
     font-size: 10px;
@@ -189,8 +189,8 @@
     max-width: 50px;
   }
   .category-circle {
-    width: 112px;
-    height: 112px;
+    width: 120px;
+    height: 120px;
   }
   .category-name {
     font-size: 10.5px;
