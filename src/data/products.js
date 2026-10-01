@@ -4,6 +4,8 @@ import product3 from '../assets/products/product-3.png';
 import product4 from '../assets/products/product-4.png';
 
 
+import { necklacesData } from './necklaces';
+
 export const featuredProducts = [
   {
     id: 1,
@@ -41,5 +43,10 @@ export const featuredProducts = [
     category: 'Rings',
     tag: 'Popular',
   },
-
 ];
+
+export const allProducts = [
+  ...featuredProducts,
+  ...necklacesData,
+];
+

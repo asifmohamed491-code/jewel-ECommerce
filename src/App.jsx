@@ -15,7 +15,7 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
 import SearchModal from './components/SearchModal';
-import { featuredProducts } from './data/products';
+import { featuredProducts, allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
 
@@ -45,9 +45,26 @@ export default function App() {
     }
     return [1];
   });
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#category-necklaces') {
+      return 'necklaces';
+    }
+    return null;
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Sync hash changes for category navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#category-necklaces') {
+        setSelectedCategory('necklaces');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Sync favorites with localStorage
   useEffect(() => {
@@ -57,6 +74,7 @@ export default function App() {
       console.error('Error saving favorites to localStorage:', e);
     }
   }, [wishlistIds]);
+
 
   // Subtle GSAP ScrollTrigger storytelling reveals
   useEffect(() => {
@@ -331,8 +349,40 @@ export default function App() {
     );
   };
 
+  // Select category handler
+  const handleSelectCategory = (categoryId) => {
+    if (categoryId === 'necklaces') {
+      setSelectedCategory('necklaces');
+      window.location.hash = '#category-necklaces';
+      setTimeout(() => {
+        const shopElement = document.getElementById('shop');
+        if (shopElement) {
+          shopElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+    }
+  };
+
+  // Reset to All / Featured collections
+  const handleResetCategory = () => {
+    setSelectedCategory(null);
+    if (window.location.hash === '#category-necklaces') {
+      try {
+        window.history.pushState(null, '', window.location.pathname + '#shop');
+      } catch (e) {
+        window.location.hash = '#shop';
+      }
+    }
+    setTimeout(() => {
+      const shopElement = document.getElementById('shop');
+      if (shopElement) {
+        shopElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50);
+  };
+
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const wishlistProducts = featuredProducts.filter((product) => wishlistIds.includes(product.id));
+  const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
   return (
     <div className="abusha-app" ref={appRef}>
@@ -355,14 +405,17 @@ export default function App() {
       <FeatureStrip />
 
       {/* 5. Shop By Category */}
-      <CategorySection />
+      <CategorySection onSelectCategory={handleSelectCategory} />
 
-      {/* 6. Featured Products */}
+      {/* 6. Featured Products / Dedicated Necklaces Category */}
       <ProductSection
         onAddToCart={handleAddToCart}
         onToggleWishlist={handleToggleWishlist}
         wishlistedIds={wishlistIds}
+        selectedCategory={selectedCategory}
+        onResetCategory={handleResetCategory}
       />
+
 
       {/* 7. Promotional Banner */}
       <PromoBanner />

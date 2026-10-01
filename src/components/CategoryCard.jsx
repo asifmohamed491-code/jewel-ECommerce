@@ -2,9 +2,20 @@ import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import './CategorySection.css';
 
-export default function CategoryCard({ category }) {
+export default function CategoryCard({ category, onSelectCategory }) {
+  const handleClick = (e) => {
+    if (category.id === 'necklaces' && onSelectCategory) {
+      e.preventDefault();
+      onSelectCategory('necklaces');
+    }
+  };
+
   return (
-    <a href={`#category-${category.id}`} className="category-card">
+    <a 
+      href={`#category-${category.id}`} 
+      className="category-card"
+      onClick={handleClick}
+    >
       <div className="category-circle-wrapper">
         <div className="category-circle">
           <img src={category.image} alt={category.name} className="category-img" />
@@ -17,3 +28,4 @@ export default function CategoryCard({ category }) {
     </a>
   );
 }
+

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FiSearch, FiX } from 'react-icons/fi';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { featuredProducts } from '../data/products';
+import { allProducts } from '../data/products';
 import './SearchModal.css';
 
 export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
@@ -14,12 +14,13 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
   if (!isOpen) return null;
 
   const filtered = query.trim()
-    ? featuredProducts.filter(
+    ? allProducts.filter(
         (p) =>
           p.name.toLowerCase().includes(query.toLowerCase()) ||
           p.category.toLowerCase().includes(query.toLowerCase())
       )
     : [];
+
 
   const modalContent = (
     <div 

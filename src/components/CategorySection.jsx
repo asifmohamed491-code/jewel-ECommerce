@@ -3,7 +3,7 @@ import CategoryCard from './CategoryCard';
 import { categoriesData } from '../data/categories';
 import './CategorySection.css';
 
-export default function CategorySection() {
+export default function CategorySection({ onSelectCategory }) {
   return (
     <section className="category-section" id="categories">
       <div className="container">
@@ -17,7 +17,11 @@ export default function CategorySection() {
         {/* 8 Categories Grid */}
         <div className="categories-grid">
           {categoriesData.map((category) => (
-            <CategoryCard key={category.id} category={category} />
+            <CategoryCard 
+              key={category.id} 
+              category={category} 
+              onSelectCategory={onSelectCategory}
+            />
           ))}
         </div>
       </div>
