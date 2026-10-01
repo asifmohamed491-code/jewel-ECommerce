@@ -1,11 +1,11 @@
 import necklacesImg from '../assets/categories/necklaces.png';
 import earringsImg from '../assets/categories/earrings.png';
-import secondStudsImg from '../assets/categories/second-studs.jpg';
+import secondStudsImg from '../assets/categories/second-studs.png';
 import braceletsImg from '../assets/categories/bracelets.png';
-import kadaImg from '../assets/categories/kada.jpg';
+import kadaImg from '../assets/categories/kada.png';
 import ringsImg from '../assets/categories/rings.png';
 import ankletsImg from '../assets/categories/anklets.png';
-import watchesImg from '../assets/categories/watches.jpg';
+import watchesImg from '../assets/categories/watches.png';
 
 export const categoriesData = [
   {
