@@ -20,6 +20,11 @@ import EarringsPage from './components/EarringsPage';
 import SecondStudsPage from './components/SecondStudsPage';
 import BraceletsPage from './components/BraceletsPage';
 import KadaPage from './components/KadaPage';
+import FingerRingsPage from './components/FingerRingsPage';
+import AnkletsPage from './components/AnkletsPage';
+import WatchesPage from './components/WatchesPage';
+import SareePinsPage from './components/SareePinsPage';
+import HairAccessoriesPage from './components/HairAccessoriesPage';
 import { allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
@@ -68,6 +73,24 @@ export default function App() {
       if (path === '/shop/kada' || path === '/shop/kada/' || window.location.hash === '#category-kada') {
         return '/shop/kada';
       }
+      if (path === '/shop/finger-rings' || path === '/shop/finger-rings/' || window.location.hash === '#category-finger-rings') {
+        return '/shop/finger-rings';
+      }
+      if (path === '/shop/anklets' || path === '/shop/anklets/' || window.location.hash === '#category-anklets') {
+        return '/shop/anklets';
+      }
+      if (path === '/shop/watches' || path === '/shop/watches/' || window.location.hash === '#category-watches') {
+        return '/shop/watches';
+      }
+      if (path === '/shop/saree-pins' || path === '/shop/saree-pins/' || window.location.hash === '#category-saree-pins') {
+        return '/shop/saree-pins';
+      }
+      if (path === '/shop/hair-accessories' || path === '/shop/hair-accessories/' || window.location.hash === '#category-hair-accessories') {
+        return '/shop/hair-accessories';
+      }
+      if (window.location.hash === '#category-rings') {
+        return '/shop/finger-rings';
+      }
     }
     return '/';
   });
@@ -100,6 +123,16 @@ export default function App() {
         setCurrentRoute('/shop/bracelets');
       } else if (path === '/shop/kada' || path === '/shop/kada/') {
         setCurrentRoute('/shop/kada');
+      } else if (path === '/shop/finger-rings' || path === '/shop/finger-rings/') {
+        setCurrentRoute('/shop/finger-rings');
+      } else if (path === '/shop/anklets' || path === '/shop/anklets/') {
+        setCurrentRoute('/shop/anklets');
+      } else if (path === '/shop/watches' || path === '/shop/watches/') {
+        setCurrentRoute('/shop/watches');
+      } else if (path === '/shop/saree-pins' || path === '/shop/saree-pins/') {
+        setCurrentRoute('/shop/saree-pins');
+      } else if (path === '/shop/hair-accessories' || path === '/shop/hair-accessories/') {
+        setCurrentRoute('/shop/hair-accessories');
       } else {
         setCurrentRoute('/');
       }
@@ -132,7 +165,12 @@ export default function App() {
       currentRoute === '/shop/earrings' ||
       currentRoute === '/shop/second-studs' ||
       currentRoute === '/shop/bracelets' ||
-      currentRoute === '/shop/kada'
+      currentRoute === '/shop/kada' ||
+      currentRoute === '/shop/finger-rings' ||
+      currentRoute === '/shop/anklets' ||
+      currentRoute === '/shop/watches' ||
+      currentRoute === '/shop/saree-pins' ||
+      currentRoute === '/shop/hair-accessories'
     ) return;
 
     const isMobile = window.innerWidth < 768;
@@ -408,6 +446,11 @@ export default function App() {
   const isSecondStudsPage = currentRoute === '/shop/second-studs';
   const isBraceletsPage = currentRoute === '/shop/bracelets';
   const isKadaPage = currentRoute === '/shop/kada';
+  const isFingerRingsPage = currentRoute === '/shop/finger-rings';
+  const isAnkletsPage = currentRoute === '/shop/anklets';
+  const isWatchesPage = currentRoute === '/shop/watches';
+  const isSareePinsPage = currentRoute === '/shop/saree-pins';
+  const isHairAccessoriesPage = currentRoute === '/shop/hair-accessories';
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
@@ -461,6 +504,46 @@ export default function App() {
       ) : isKadaPage ? (
         /* Dedicated Kada Page */
         <KadaPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isFingerRingsPage ? (
+        /* Dedicated Finger Rings Page */
+        <FingerRingsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isAnkletsPage ? (
+        /* Dedicated Anklets Page */
+        <AnkletsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isWatchesPage ? (
+        /* Dedicated Watches Page */
+        <WatchesPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isSareePinsPage ? (
+        /* Dedicated Saree Pins Page */
+        <SareePinsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isHairAccessoriesPage ? (
+        /* Dedicated Hair Accessories Page */
+        <HairAccessoriesPage
           onAddToCart={handleAddToCart}
           onToggleWishlist={handleToggleWishlist}
           wishlistedIds={wishlistIds}

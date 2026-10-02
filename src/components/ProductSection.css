@@ -7,7 +7,12 @@
 .necklaces-page-section,
 .earrings-page-section,
 .second-studs-page-section,
-.bracelets-page-section {
+.bracelets-page-section,
+.finger-rings-page-section,
+.anklets-page-section,
+.watches-page-section,
+.saree-pins-page-section,
+.hair-accessories-page-section {
   padding-block: 40px 64px;
   min-height: calc(100vh - 220px);
 }

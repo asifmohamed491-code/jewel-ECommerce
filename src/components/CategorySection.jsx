@@ -320,7 +320,7 @@ export default function CategorySection({ onSelectCategory }) {
     const card = e.target.closest('.category-card');
     if (!card) return;
     const href = card.getAttribute('href');
-    if (href === '/shop/necklaces' || href === '/shop/earrings' || href === '/shop/second-studs' || href === '/shop/bracelets') {
+    if (href === '/shop/necklaces' || href === '/shop/earrings' || href === '/shop/second-studs' || href === '/shop/bracelets' || href === '/shop/kada' || href === '/shop/finger-rings' || href === '/shop/anklets' || href === '/shop/watches' || href === '/shop/saree-pins' || href === '/shop/hair-accessories') {
       e.preventDefault();
       if (onSelectCategory) {
         onSelectCategory(href);

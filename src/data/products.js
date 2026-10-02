@@ -8,7 +8,11 @@ import { necklacesData } from './necklaces';
 import { earringsData } from './earrings';
 import { secondStudsData } from './secondStuds';
 import { braceletsData } from './bracelets';
-import { kadaData } from './kada';
+import { fingerRingsData } from './fingerRings';
+import { ankletsData } from './anklets';
+import { watchesData } from './watches';
+import { sareePinsData } from './sareePins';
+import { hairAccessoriesData } from './hairAccessories';
 
 export const featuredProducts = [
   {
@@ -55,6 +59,10 @@ export const allProducts = [
   ...earringsData,
   ...secondStudsData,
   ...braceletsData,
-  ...kadaData,
+  ...fingerRingsData,
+  ...ankletsData,
+  ...watchesData,
+  ...sareePinsData,
+  ...hairAccessoriesData,
 ];
 

@@ -33,6 +33,31 @@ export default function CategoryCard({ category, onSelectCategory, isDragging, h
       if (onSelectCategory) {
         onSelectCategory('/shop/kada');
       }
+    } else if (category.id === 'rings') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/finger-rings');
+      }
+    } else if (category.id === 'anklets') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/anklets');
+      }
+    } else if (category.id === 'watches') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/watches');
+      }
+    } else if (category.id === 'saree-pins') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/saree-pins');
+      }
+    } else if (category.id === 'hair-accessories') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/hair-accessories');
+      }
     }
   };
 
@@ -42,6 +67,11 @@ export default function CategoryCard({ category, onSelectCategory, isDragging, h
     if (category.id === 'second-studs') return '/shop/second-studs';
     if (category.id === 'bracelets') return '/shop/bracelets';
     if (category.id === 'kada') return '/shop/kada';
+    if (category.id === 'rings') return '/shop/finger-rings';
+    if (category.id === 'anklets') return '/shop/anklets';
+    if (category.id === 'watches') return '/shop/watches';
+    if (category.id === 'saree-pins') return '/shop/saree-pins';
+    if (category.id === 'hair-accessories') return '/shop/hair-accessories';
     return `#category-${category.id}`;
   };
 
