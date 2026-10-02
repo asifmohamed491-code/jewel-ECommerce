@@ -17,7 +17,8 @@ import WishlistDrawer from './components/WishlistDrawer';
 import SearchModal from './components/SearchModal';
 import NecklacesPage from './components/NecklacesPage';
 import EarringsPage from './components/EarringsPage';
-import { featuredProducts, allProducts } from './data/products';
+import SecondStudsPage from './components/SecondStudsPage';
+import { allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
 
@@ -56,6 +57,9 @@ export default function App() {
       if (path === '/shop/earrings' || path === '/shop/earrings/' || window.location.hash === '#category-earrings') {
         return '/shop/earrings';
       }
+      if (path === '/shop/second-studs' || path === '/shop/second-studs/' || window.location.hash === '#category-second-studs') {
+        return '/shop/second-studs';
+      }
     }
     return '/';
   });
@@ -82,6 +86,8 @@ export default function App() {
         setCurrentRoute('/shop/necklaces');
       } else if (path === '/shop/earrings' || path === '/shop/earrings/') {
         setCurrentRoute('/shop/earrings');
+      } else if (path === '/shop/second-studs' || path === '/shop/second-studs/') {
+        setCurrentRoute('/shop/second-studs');
       } else {
         setCurrentRoute('/');
       }
@@ -105,7 +111,7 @@ export default function App() {
   // Subtle GSAP ScrollTrigger storytelling reveals
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings') return;
+    if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings' || currentRoute === '/shop/second-studs') return;
 
     const isMobile = window.innerWidth < 768;
     const yOffset = isMobile ? 12 : 22;
@@ -377,6 +383,7 @@ export default function App() {
 
   const isNecklacesPage = currentRoute === '/shop/necklaces';
   const isEarringsPage = currentRoute === '/shop/earrings';
+  const isSecondStudsPage = currentRoute === '/shop/second-studs';
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
@@ -406,6 +413,14 @@ export default function App() {
       ) : isEarringsPage ? (
         /* Dedicated Earrings Page */
         <EarringsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isSecondStudsPage ? (
+        /* Dedicated Second Studs Page */
+        <SecondStudsPage
           onAddToCart={handleAddToCart}
           onToggleWishlist={handleToggleWishlist}
           wishlistedIds={wishlistIds}

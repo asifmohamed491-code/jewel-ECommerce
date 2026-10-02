@@ -18,12 +18,18 @@ export default function CategoryCard({ category, onSelectCategory, isDragging, h
       if (onSelectCategory) {
         onSelectCategory('/shop/earrings');
       }
+    } else if (category.id === 'second-studs') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/second-studs');
+      }
     }
   };
 
   const getHref = () => {
     if (category.id === 'necklaces') return '/shop/necklaces';
     if (category.id === 'earrings') return '/shop/earrings';
+    if (category.id === 'second-studs') return '/shop/second-studs';
     return `#category-${category.id}`;
   };
 
