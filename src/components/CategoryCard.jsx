@@ -13,12 +13,23 @@ export default function CategoryCard({ category, onSelectCategory, isDragging })
       if (onSelectCategory) {
         onSelectCategory('/shop/necklaces');
       }
+    } else if (category.id === 'earrings') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/earrings');
+      }
     }
+  };
+
+  const getHref = () => {
+    if (category.id === 'necklaces') return '/shop/necklaces';
+    if (category.id === 'earrings') return '/shop/earrings';
+    return `#category-${category.id}`;
   };
 
   return (
     <a 
-      href={category.id === 'necklaces' ? '/shop/necklaces' : `#category-${category.id}`} 
+      href={getHref()} 
       className="category-card"
       onClick={handleClick}
       draggable={false}

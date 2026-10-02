@@ -5,6 +5,7 @@ import product4 from '../assets/products/product-4.png';
 
 
 import { necklacesData } from './necklaces';
+import { earringsData } from './earrings';
 
 export const featuredProducts = [
   {
@@ -48,5 +49,6 @@ export const featuredProducts = [
 export const allProducts = [
   ...featuredProducts,
   ...necklacesData,
+  ...earringsData,
 ];
 
