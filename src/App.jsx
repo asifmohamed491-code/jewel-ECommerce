@@ -18,6 +18,7 @@ import SearchModal from './components/SearchModal';
 import NecklacesPage from './components/NecklacesPage';
 import EarringsPage from './components/EarringsPage';
 import SecondStudsPage from './components/SecondStudsPage';
+import BraceletsPage from './components/BraceletsPage';
 import { allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
@@ -60,6 +61,9 @@ export default function App() {
       if (path === '/shop/second-studs' || path === '/shop/second-studs/' || window.location.hash === '#category-second-studs') {
         return '/shop/second-studs';
       }
+      if (path === '/shop/bracelets' || path === '/shop/bracelets/' || window.location.hash === '#category-bracelets') {
+        return '/shop/bracelets';
+      }
     }
     return '/';
   });
@@ -88,6 +92,8 @@ export default function App() {
         setCurrentRoute('/shop/earrings');
       } else if (path === '/shop/second-studs' || path === '/shop/second-studs/') {
         setCurrentRoute('/shop/second-studs');
+      } else if (path === '/shop/bracelets' || path === '/shop/bracelets/') {
+        setCurrentRoute('/shop/bracelets');
       } else {
         setCurrentRoute('/');
       }
@@ -112,6 +118,7 @@ export default function App() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings' || currentRoute === '/shop/second-studs') return;
+    if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings' || currentRoute === '/shop/second-studs' || currentRoute === '/shop/bracelets') return;
 
     const isMobile = window.innerWidth < 768;
     const yOffset = isMobile ? 12 : 22;
@@ -384,6 +391,7 @@ export default function App() {
   const isNecklacesPage = currentRoute === '/shop/necklaces';
   const isEarringsPage = currentRoute === '/shop/earrings';
   const isSecondStudsPage = currentRoute === '/shop/second-studs';
+  const isBraceletsPage = currentRoute === '/shop/bracelets';
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
@@ -421,6 +429,14 @@ export default function App() {
       ) : isSecondStudsPage ? (
         /* Dedicated Second Studs Page */
         <SecondStudsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isBraceletsPage ? (
+        /* Dedicated Bracelets Page */
+        <BraceletsPage
           onAddToCart={handleAddToCart}
           onToggleWishlist={handleToggleWishlist}
           wishlistedIds={wishlistIds}

@@ -7,6 +7,7 @@ import product4 from '../assets/products/product-4.png';
 import { necklacesData } from './necklaces';
 import { earringsData } from './earrings';
 import { secondStudsData } from './secondStuds';
+import { braceletsData } from './bracelets';
 
 export const featuredProducts = [
   {
@@ -52,5 +53,6 @@ export const allProducts = [
   ...necklacesData,
   ...earringsData,
   ...secondStudsData,
+  ...braceletsData,
 ];
 

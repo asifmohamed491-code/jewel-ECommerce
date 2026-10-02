@@ -320,7 +320,7 @@ export default function CategorySection({ onSelectCategory }) {
     const card = e.target.closest('.category-card');
     if (!card) return;
     const href = card.getAttribute('href');
-    if (href === '/shop/necklaces' || href === '/shop/earrings' || href === '/shop/second-studs') {
+    if (href === '/shop/necklaces' || href === '/shop/earrings' || href === '/shop/second-studs' || href === '/shop/bracelets') {
       e.preventDefault();
       if (onSelectCategory) {
         onSelectCategory(href);
