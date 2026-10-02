@@ -2,9 +2,9 @@ import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import './CategorySection.css';
 
-export default function CategoryCard({ category, onSelectCategory, isDragging }) {
+export default function CategoryCard({ category, onSelectCategory, isDragging, hasMovedRef }) {
   const handleClick = (e) => {
-    if (isDragging) {
+    if (isDragging || hasMovedRef?.current) {
       e.preventDefault();
       return;
     }

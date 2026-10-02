@@ -18,6 +18,7 @@ export default function CategorySection({ onSelectCategory }) {
   const activeTweenRef = useRef(null);
   const isInteractingRef = useRef(false);
   const dragDataRef = useRef({ startX: 0, startPos: 0, hasMoved: false, pointerId: null });
+  const hasMovedRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
 
   const getVisibleCount = (width) => {
@@ -141,6 +142,7 @@ export default function CategorySection({ onSelectCategory }) {
     if (e.button !== 0 && e.pointerType === 'mouse') return;
 
     isInteractingRef.current = true;
+    hasMovedRef.current = false;
     clearTimeout(autoSlideTimerRef.current);
     if (activeTweenRef.current) {
       activeTweenRef.current.kill();
@@ -152,21 +154,24 @@ export default function CategorySection({ onSelectCategory }) {
       hasMoved: false,
       pointerId: e.pointerId,
     };
-
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    } catch (err) {
-      // Ignore
-    }
+    // DO NOT call setPointerCapture here!
+    // Capturing pointer on pointerdown redirects mouse click events away from child <a> elements on desktop.
   };
 
   const handlePointerMove = (e) => {
     if (!isInteractingRef.current || dragDataRef.current.pointerId !== e.pointerId) return;
 
     const dx = e.clientX - dragDataRef.current.startX;
-    if (!dragDataRef.current.hasMoved && Math.abs(dx) > 4) {
+    if (!dragDataRef.current.hasMoved && Math.abs(dx) > 5) {
       dragDataRef.current.hasMoved = true;
+      hasMovedRef.current = true;
       setIsDragging(true);
+      // ONLY capture pointer when actual drag movement occurs
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch (err) {
+        // Ignore
+      }
     }
 
     if (dragDataRef.current.hasMoved) {
@@ -193,10 +198,12 @@ export default function CategorySection({ onSelectCategory }) {
   const handlePointerUp = (e) => {
     if (dragDataRef.current.pointerId !== e.pointerId) return;
 
-    try {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    } catch (err) {
-      // Ignore
+    if (dragDataRef.current.hasMoved) {
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch (err) {
+        // Ignore
+      }
     }
 
     isInteractingRef.current = false;
@@ -222,11 +229,15 @@ export default function CategorySection({ onSelectCategory }) {
           if (trackRef.current) {
             gsap.set(trackRef.current, { x: -posRef.current.x });
           }
-          setTimeout(() => setIsDragging(false), 50);
+          setTimeout(() => {
+            hasMovedRef.current = false;
+            setIsDragging(false);
+          }, 80);
           scheduleAutoSlide();
         },
       });
     } else {
+      hasMovedRef.current = false;
       setIsDragging(false);
       scheduleAutoSlide();
     }
@@ -301,6 +312,22 @@ export default function CategorySection({ onSelectCategory }) {
     };
   }, [scheduleAutoSlide]);
 
+  const handleViewportClick = (e) => {
+    if (hasMovedRef.current) {
+      e.preventDefault();
+      return;
+    }
+    const card = e.target.closest('.category-card');
+    if (!card) return;
+    const href = card.getAttribute('href');
+    if (href === '/shop/necklaces' || href === '/shop/earrings') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory(href);
+      }
+    }
+  };
+
   return (
     <section className="category-section" id="categories">
       <div className="container">
@@ -320,6 +347,7 @@ export default function CategorySection({ onSelectCategory }) {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
+            onClick={handleViewportClick}
           >
             <div className="category-carousel-track" ref={trackRef}>
               {repeatedCategories.map((category, idx) => (
@@ -328,6 +356,7 @@ export default function CategorySection({ onSelectCategory }) {
                     category={category} 
                     onSelectCategory={onSelectCategory}
                     isDragging={isDragging}
+                    hasMovedRef={hasMovedRef}
                   />
                 </div>
               ))}
