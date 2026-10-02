@@ -133,8 +133,8 @@
 }
 
 .promo-ribbon-doodle {
-  width: 120px;
-  height: 60px;
+  width: 150px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +169,7 @@
     inset-inline-end: 10px;
     inset-block-start: 10px;
     width: 80px;
+    height: 40px;
   }
 }
 
@@ -198,4 +199,3 @@
     padding: 8px 18px;
   }
 }
-

@@ -39,15 +39,33 @@ export default function PromoBanner() {
 
             {/* Subtle decorative heart ribbon doodle */}
             <div className="promo-ribbon-doodle">
-              <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="doodle-svg">
-                <path 
-                  d="M10 40 C 35 15, 60 45, 85 20 C 95 10, 110 15, 105 35 C 100 50, 85 45, 80 35 C 75 25, 90 10, 102 22" 
-                  stroke="#e29db1" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round" 
-                  fill="none"
-                />
-              </svg>
+             <svg
+  viewBox="20 0 115 52"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  className="doodle-svg"
+  preserveAspectRatio="none"
+>
+  <path
+    d="M20 52
+       C32 47, 42 40.5, 53 40.5
+       C62 40.5, 65 43, 71 43
+       C80 43, 86 36, 88 31.5
+       C91 26, 93.5 21, 93 17
+       C92.5 12, 89 10.5, 87.5 10.8
+       C84.5 11, 82.5 15, 82 19
+       C80 16, 77 15, 75 15.5
+       C72 16.5, 71 21, 74 25
+       C77 29, 83 32, 89 31.5
+       C98 31, 105 25, 111 17
+       C117 9, 125 0, 135 0"
+    stroke="#e29db1"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    fill="none"
+  />
+</svg>
             </div>
           </div>
         </div>
