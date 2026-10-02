@@ -28,6 +28,11 @@ export default function CategoryCard({ category, onSelectCategory, isDragging, h
       if (onSelectCategory) {
         onSelectCategory('/shop/bracelets');
       }
+    } else if (category.id === 'kada') {
+      e.preventDefault();
+      if (onSelectCategory) {
+        onSelectCategory('/shop/kada');
+      }
     }
   };
 
@@ -36,6 +41,7 @@ export default function CategoryCard({ category, onSelectCategory, isDragging, h
     if (category.id === 'earrings') return '/shop/earrings';
     if (category.id === 'second-studs') return '/shop/second-studs';
     if (category.id === 'bracelets') return '/shop/bracelets';
+    if (category.id === 'kada') return '/shop/kada';
     return `#category-${category.id}`;
   };
 

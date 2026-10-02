@@ -19,6 +19,7 @@ import NecklacesPage from './components/NecklacesPage';
 import EarringsPage from './components/EarringsPage';
 import SecondStudsPage from './components/SecondStudsPage';
 import BraceletsPage from './components/BraceletsPage';
+import KadaPage from './components/KadaPage';
 import { allProducts } from './data/products';
 import defaultCartImg from './assets/products/product-1.png';
 import './App.css';
@@ -64,6 +65,9 @@ export default function App() {
       if (path === '/shop/bracelets' || path === '/shop/bracelets/' || window.location.hash === '#category-bracelets') {
         return '/shop/bracelets';
       }
+      if (path === '/shop/kada' || path === '/shop/kada/' || window.location.hash === '#category-kada') {
+        return '/shop/kada';
+      }
     }
     return '/';
   });
@@ -94,6 +98,8 @@ export default function App() {
         setCurrentRoute('/shop/second-studs');
       } else if (path === '/shop/bracelets' || path === '/shop/bracelets/') {
         setCurrentRoute('/shop/bracelets');
+      } else if (path === '/shop/kada' || path === '/shop/kada/') {
+        setCurrentRoute('/shop/kada');
       } else {
         setCurrentRoute('/');
       }
@@ -119,6 +125,15 @@ export default function App() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings' || currentRoute === '/shop/second-studs') return;
     if (prefersReducedMotion || !appRef.current || currentRoute === '/shop/necklaces' || currentRoute === '/shop/earrings' || currentRoute === '/shop/second-studs' || currentRoute === '/shop/bracelets') return;
+    if (
+      prefersReducedMotion ||
+      !appRef.current ||
+      currentRoute === '/shop/necklaces' ||
+      currentRoute === '/shop/earrings' ||
+      currentRoute === '/shop/second-studs' ||
+      currentRoute === '/shop/bracelets' ||
+      currentRoute === '/shop/kada'
+    ) return;
 
     const isMobile = window.innerWidth < 768;
     const yOffset = isMobile ? 12 : 22;
@@ -392,6 +407,7 @@ export default function App() {
   const isEarringsPage = currentRoute === '/shop/earrings';
   const isSecondStudsPage = currentRoute === '/shop/second-studs';
   const isBraceletsPage = currentRoute === '/shop/bracelets';
+  const isKadaPage = currentRoute === '/shop/kada';
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistProducts = allProducts.filter((product) => wishlistIds.includes(product.id));
 
@@ -437,6 +453,14 @@ export default function App() {
       ) : isBraceletsPage ? (
         /* Dedicated Bracelets Page */
         <BraceletsPage
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          wishlistedIds={wishlistIds}
+          onBack={() => navigate('/')}
+        />
+      ) : isKadaPage ? (
+        /* Dedicated Kada Page */
+        <KadaPage
           onAddToCart={handleAddToCart}
           onToggleWishlist={handleToggleWishlist}
           wishlistedIds={wishlistIds}

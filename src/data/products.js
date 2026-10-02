@@ -8,6 +8,7 @@ import { necklacesData } from './necklaces';
 import { earringsData } from './earrings';
 import { secondStudsData } from './secondStuds';
 import { braceletsData } from './bracelets';
+import { kadaData } from './kada';
 
 export const featuredProducts = [
   {
@@ -54,5 +55,6 @@ export const allProducts = [
   ...earringsData,
   ...secondStudsData,
   ...braceletsData,
+  ...kadaData,
 ];
 
